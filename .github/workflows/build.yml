@@ -13,9 +13,12 @@ jobs:
         run: unzip "Claude zip.zip" -d extracted
       - name: Build APK
         run: |
-          cd extracted/SonarAndroid
+        ls extracted/
+          GRADLE_DIR=$(find extracted -name "gradlew" -type f | head -1 | xargs dirname)
+          cd "$GRADLE_DIR"
           chmod +x gradlew
           ./gradlew assembleDebug
+          
       - uses: actions/upload-artifact@v4
         with:
           name: SONAR-APK
