@@ -1,0 +1,17 @@
+workflows:
+  android-workflow:
+    name: SONAR APK
+    instance_type: mac_mini_m1
+    environment:
+      java: 17
+    scripts:
+      - name: Extract ZIP
+        script: unzip "SonarAndroid.zip" -d extracted
+      - name: Build APK
+        script: |
+          GRADLE_DIR=$(find extracted -name "gradlew" -type f | head -1 | xargs dirname)
+          cd "$GRADLE_DIR"
+          chmod +x gradlew
+          ./gradlew assembleDebug
+    artifacts:
+      - "**/*.apk"
