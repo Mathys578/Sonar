@@ -10,7 +10,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Extract ZIP
-        run: unzip "SonarAndroid.zip" -d extracted
+        run: unzip "Claude zip.zip" -d extracted
       - name: Build APK
         run: |
           cd extracted/SonarAndroid
